@@ -2,7 +2,7 @@ const { User } = require('../models');
 const jwtGenerate = require('../auth/jwtGenerate');
 
 const create = async (req, res) => {
-  const { email, password } = req.body;
+  const { email } = req.body;
 
   const alreadyExists = await User.findOne({ where: { email } });
 

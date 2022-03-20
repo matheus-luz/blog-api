@@ -1,6 +1,14 @@
 const { User } = require('../models');
 const jwtGenerate = require('../auth/jwtGenerate');
 
+const usersAll = async (req, res) => {
+  const users = await User.findAll({
+    attributes: { exclude: ['password'] },
+  });
+
+  return res.status(200).json(users);
+};
+
 const create = async (req, res) => {
   const { displayName, email, password, image } = req.body;
 
@@ -17,4 +25,5 @@ const create = async (req, res) => {
 
 module.exports = {
   create,
+  usersAll,
 };

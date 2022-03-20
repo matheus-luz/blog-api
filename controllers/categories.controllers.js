@@ -1,5 +1,11 @@
 const { Categorie } = require('../models');
 
+const categoriesAll = async (req, res) => {
+  const categories = await Categorie.findAll();
+
+  return res.status(200).json(categories);
+};
+
 const create = async (req, res, _next) => {
   const { name } = req.body;
 
@@ -11,5 +17,6 @@ const create = async (req, res, _next) => {
 };
 
 module.exports = {
+  categoriesAll,
   create,
 };

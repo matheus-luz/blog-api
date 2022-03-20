@@ -1,5 +1,5 @@
 const express = require('express');
-const { usersAll, create } = require('../controllers/user.controllers');
+const { usersAll, create, userId } = require('../controllers/user.controllers');
 const auth = require('../middlewares/jwt.middlewares');
 const validateUser = require('../middlewares/validateUser.middlewares');
 
@@ -15,6 +15,12 @@ router.get(
   '/',
   auth,
   usersAll,
+);
+
+router.get(
+  '/:id',
+  auth,
+  userId,
 );
 
 module.exports = router;

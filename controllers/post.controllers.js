@@ -21,9 +21,10 @@ const postAll = async (req, res, _next) => {
 
 const create = async (req, res, _next) => {
   const { title, content } = req.body;
-  const { id } = req.tokenData.id;
-  const published = new Date();
-  const updated = new Date();
+  const { id } = req.tokenData;
+
+  const published = new Date().toString();
+  const updated = new Date().toString();
 
   const newPost = await BlogPost
     .create({ title, content, userId: id, published, updated });

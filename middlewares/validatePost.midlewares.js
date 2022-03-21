@@ -29,10 +29,11 @@ const validateCategoryIds = async (req, res, next) => {
   }
 
   const categories = await Categorie.findAll();
-  const registeredIds = categories.map((cate) => cate.id);
-  const idExist = categoryIds.filter((categId) => registeredIds.includes(categId));
+  // 
+  const registeredIds = categories.map(({ id }) => id);
+  const idExist = categoryIds.every((id) => registeredIds.includes(id));
 
-  if (!idExist) return res.status(400).json({ error: '"categoryIs" not found' });
+  if (!idExist) return res.status(400).json({ message: '"categoryIds" not found' });
 
   next();
 };

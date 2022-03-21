@@ -29,9 +29,7 @@ const validateCategoryIds = async (req, res, next) => {
   }
 
   const categories = await Categorie.findAll();
-  // 
-  const registeredIds = categories.map(({ id }) => id);
-  const idExist = categoryIds.every((id) => registeredIds.includes(id));
+  const idExist = categoryIds.find((id) => categories.includes(id));
 
   if (!idExist) return res.status(400).json({ message: '"categoryIds" not found' });
 

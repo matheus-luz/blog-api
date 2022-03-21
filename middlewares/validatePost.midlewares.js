@@ -27,9 +27,10 @@ const validateCategoryIds = async (req, res, next) => {
     return res.status(400)
     .json({ message: '"categoryIds" is required' });
   }
-
+  
   const categories = await Categorie.findAll();
-  const idExist = categoryIds.find((id) => categories.includes(id));
+  const filteredId = categories.map(({ id }) => id);
+  const idExist = categoryIds.every((id) => filteredId.includes(id));
 
   if (!idExist) return res.status(400).json({ message: '"categoryIds" not found' });
 
